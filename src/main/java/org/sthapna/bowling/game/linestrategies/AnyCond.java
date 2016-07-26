@@ -4,6 +4,7 @@ import org.sthapna.bowling.game.Frame;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.sthapna.bowling.game.Frame.STRIKE_SCORE;
@@ -13,15 +14,15 @@ final class AnyCond implements Line {
 
     private final List<Frame> line;
 
-    public AnyCond(List<Frame> line, Frame frame) {
-        this.line = concat(line, Arrays.asList(frame));
+    private AnyCond(List<Frame> line, Frame frame) {
+        this.line = concat(line, Collections.singletonList(frame));
     }
 
     public AnyCond(){
         line = new ArrayList<>();
     }
 
-    public AnyCond(List<Frame> frames) {
+    private AnyCond(List<Frame> frames) {
         this.line = frames;
     }
 

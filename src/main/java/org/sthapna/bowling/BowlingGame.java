@@ -5,7 +5,7 @@ import org.sthapna.bowling.game.linestrategies.Line;
 import org.sthapna.bowling.parser.StringParser;
 
 public class BowlingGame {
-    Line game;
+    private Line game;
 
     public static BowlingGame play() {
         return new BowlingGame();

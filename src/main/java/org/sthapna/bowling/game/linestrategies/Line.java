@@ -11,7 +11,7 @@ public interface Line {
         AllStrike(new PerfectGame()),
         DEFAULT(new AnyCond());
 
-        Line line;
+        final Line line;
         Type(Line l) {
             line = l;
         }

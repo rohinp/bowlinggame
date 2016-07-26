@@ -7,10 +7,10 @@ import java.util.List;
 
 public class StringParser {
 
-    public final int HALF_OF_LINE = 10;
+    private final int HALF_OF_LINE = 10;
     private final List<String> tokens;
 
-    public StringParser(List<String> tokens) {
+    private StringParser(List<String> tokens) {
         this.tokens = tokens;
     }
 
