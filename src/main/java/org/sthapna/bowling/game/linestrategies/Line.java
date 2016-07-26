@@ -2,6 +2,8 @@ package org.sthapna.bowling.game.linestrategies;
 
 import org.sthapna.bowling.game.Frame;
 
+import java.util.List;
+
 public interface Line {
     enum Type {
         NoSpareNoStrike(new NoSpareNoStrike()),
@@ -20,6 +22,7 @@ public interface Line {
     }
 
     Line add(Frame frame);
+    Line add(List<Frame> frames);
     int totalScore();
 
     static Line create(Type type) {

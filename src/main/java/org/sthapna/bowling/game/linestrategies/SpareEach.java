@@ -20,9 +20,18 @@ final class SpareEach implements Line {
         line = new ArrayList<>();
     }
 
+    public SpareEach(List<Frame> frames) {
+        this.line = frames;
+    }
+
     @Override
     public Line add(Frame frame) {
         return new SpareEach(this.line, frame);
+    }
+
+    @Override
+    public Line add(List<Frame> frames) {
+        return new SpareEach(frames);
     }
 
     @Override

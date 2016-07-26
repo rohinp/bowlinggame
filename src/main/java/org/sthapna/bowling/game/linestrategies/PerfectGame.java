@@ -2,6 +2,8 @@ package org.sthapna.bowling.game.linestrategies;
 
 import org.sthapna.bowling.game.Frame;
 
+import java.util.List;
+
 final class PerfectGame implements Line {
 
     private final int TURNS = 2;
@@ -9,6 +11,11 @@ final class PerfectGame implements Line {
 
     @Override
     public Line add(Frame frame) {
+        throw new PerfectGame.CannotAddInPerfectGame();
+    }
+
+    @Override
+    public Line add(List<Frame> frames) {
         throw new PerfectGame.CannotAddInPerfectGame();
     }
 

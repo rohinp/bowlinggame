@@ -19,9 +19,18 @@ final class NoSpareNoStrike implements Line {
         line = new ArrayList<>();
     }
 
+    public NoSpareNoStrike(List<Frame> frames) {
+        this.line = frames;
+    }
+
     @Override
     public Line add(Frame frame) {
         return new NoSpareNoStrike(this.line, frame);
+    }
+
+    @Override
+    public Line add(List<Frame> frames) {
+        return new NoSpareNoStrike(frames);
     }
 
     @Override

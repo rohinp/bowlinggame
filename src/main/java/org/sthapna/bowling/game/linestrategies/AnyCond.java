@@ -21,9 +21,18 @@ final class AnyCond implements Line {
         line = new ArrayList<>();
     }
 
+    public AnyCond(List<Frame> frames) {
+        this.line = frames;
+    }
+
     @Override
     public Line add(Frame frame) {
         return new AnyCond(this.line, frame);
+    }
+
+    @Override
+    public Line add(List<Frame> frames) {
+        return new AnyCond(frames);
     }
 
     @Override
