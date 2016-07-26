@@ -1,4 +1,4 @@
-package org.sthapna.bowling;
+package org.sthapna.bowling.game;
 
 import org.junit.Assert;
 import org.junit.Test;

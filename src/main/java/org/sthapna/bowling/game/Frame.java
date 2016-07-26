@@ -1,4 +1,4 @@
-package org.sthapna.bowling;
+package org.sthapna.bowling.game;
 
 public interface Frame {
     int STRIKE_SCORE = 10;

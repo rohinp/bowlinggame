@@ -1,6 +1,6 @@
 package org.sthapna.bowling.util;
 
-import org.sthapna.bowling.Frame;
+import org.sthapna.bowling.game.Frame;
 
 import java.util.ArrayList;
 import java.util.List;
