@@ -29,4 +29,16 @@ public class BowlingGameTests {
         //then
         Assert.assertEquals(150,bowlingGame.totalScore());
     }
+
+    @Test
+    public void itShouldTakeAllPinAndCalculateTotal(){
+        //given
+        BowlingGame bowlingGame = BowlingGame.play();
+
+        //when
+        bowlingGame.input("9-9-9-9-9-9-9-9-9-9-");
+
+        //then
+        Assert.assertEquals(90,bowlingGame.totalScore());
+    }
 }

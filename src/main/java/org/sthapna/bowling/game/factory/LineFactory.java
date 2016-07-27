@@ -13,7 +13,15 @@ public class LineFactory {
             return Line.create(Line.Type.AllStrike);
         if(parse.isAllSpare())
             return makeAllSpareLine(parse.tokens());
+        if(parse.isAllPin())
+            return makeAllPinLine(parse.tokens());
         return null;
+    }
+
+    private static Line makeAllPinLine(List<String> tokens) {
+        return Line.create(Line.Type.NoSpareNoStrike).add(
+                tokens.stream().filter(e -> e.matches("\\d"))
+                        .map(f -> Frame.onePin(Integer.parseInt(f))).collect(Collectors.toList()));
     }
 
     private static Line makeAllSpareLine(List<String> tokens){
