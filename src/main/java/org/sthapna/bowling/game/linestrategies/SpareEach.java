@@ -39,6 +39,11 @@ final class SpareEach implements Line {
         return loop(line,0);
     }
 
+    @Override
+    public int noOfFrames() {
+        return line.size();
+    }
+
     private int loop(final List<Frame> line,final int acc) {
         if(line.isEmpty())
             return acc;

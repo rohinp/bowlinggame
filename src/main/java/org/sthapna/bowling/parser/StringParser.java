@@ -33,4 +33,8 @@ public class StringParser {
     public boolean isAllPin() {
         return tokens.stream().filter(e -> Symbols.PIN.val().equals(e)).count() == HALF_OF_LINE;
     }
+
+    public boolean isNoStrikeNoSpare() {
+        return !tokens.contains(Symbols.SPARE.val()) || !tokens.contains(Symbols.STRIKE.val());
+    }
 }

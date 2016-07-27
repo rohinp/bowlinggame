@@ -10,31 +10,29 @@ import java.util.stream.Stream;
 public class ListUtil {
 
     public static List<Frame> concat(List<Frame> listOne,List<Frame> listTwo) {
-
         return listOne != null ? new ArrayList<>(Stream.concat(listOne.stream(), listTwo.stream()).collect(Collectors.toList())):
                 new ArrayList<>(listTwo);
     }
 
-    public static Frame head(List<Frame> list) {
+    public static<T> T head(List<T> list) {
         return list.get(0);
     }
 
-    public static List<Frame> tail(List<Frame> list) {
+    public static<T> List<T> tail(List<T> list) {
         return list.subList(1,list.size());
     }
 
-    public static Frame next(final List<Frame> list) {
+    public static<T> T next(final List<T> list) {
         if(list.size() > 1)
             return list.get(1);
         throw new LineEmptyException();
     }
 
-    public static Frame nextToNext(final List<Frame> list) {
+    public static<T> T nextToNext(final List<T> list) {
         if(list.size() >= 2)
             return list.get(2);
         throw new LineEmptyException();
     }
-
 
     private static class LineEmptyException extends RuntimeException {
     }

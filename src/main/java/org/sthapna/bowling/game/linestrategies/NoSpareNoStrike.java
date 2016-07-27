@@ -37,4 +37,9 @@ final class NoSpareNoStrike implements Line {
     public int totalScore() {
         return line.stream().mapToInt(Frame::score).sum();
     }
+
+    @Override
+    public int noOfFrames() {
+        return line.size();
+    }
 }

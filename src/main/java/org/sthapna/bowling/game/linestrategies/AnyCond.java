@@ -40,6 +40,11 @@ final class AnyCond implements Line {
         return loop(line,0);
     }
 
+    @Override
+    public int noOfFrames() {
+        return line.size();
+    }
+
     private int loop(final List<Frame> line,int acc) {
         if(line.isEmpty())
             return acc;

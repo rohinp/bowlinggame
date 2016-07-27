@@ -6,6 +6,8 @@ import java.util.List;
 
 final class PerfectGame implements Line {
 
+    private final int TOTAL_FRAMES = 10;
+
     @Override
     public Line add(Frame frame) {
         throw new PerfectGame.CannotAddInPerfectGame();
@@ -18,9 +20,13 @@ final class PerfectGame implements Line {
 
     @Override
     public int totalScore() {
-        int TOTAL_FRAMES = 10;
         int TURNS = 2;
         return (Frame.STRIKE_SCORE * TURNS + Frame.STRIKE_SCORE) * TOTAL_FRAMES;
+    }
+
+    @Override
+    public int noOfFrames() {
+        return TOTAL_FRAMES;
     }
 
     private class CannotAddInPerfectGame extends RuntimeException {}
