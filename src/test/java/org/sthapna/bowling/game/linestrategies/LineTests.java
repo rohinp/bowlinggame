@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.sthapna.bowling.game.Frame.*;
-import static org.sthapna.bowling.game.linestrategies.Line.Type;
 import static org.sthapna.bowling.game.linestrategies.Line.create;
+import static org.sthapna.bowling.game.linestrategies.Line.perfectGame;
 
 public class LineTests {
     @Test
@@ -51,7 +51,7 @@ public class LineTests {
     @Test
     public void itShouldCreateALineWith_AllStrike(){
         //given
-        Line line = create(Type.AllStrike);
+        Line line = perfectGame();
         //when
 
         //then
