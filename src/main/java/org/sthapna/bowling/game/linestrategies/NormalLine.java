@@ -9,30 +9,30 @@ import java.util.List;
 import static org.sthapna.bowling.game.Frame.STRIKE_SCORE;
 import static org.sthapna.bowling.util.ListUtil.*;
 
-final class AnyCond implements Line {
+final class NormalLine implements Line {
 
     private final List<Frame> line;
 
-    private AnyCond(List<Frame> line, Frame frame) {
+    private NormalLine(List<Frame> line, Frame frame) {
         this.line = concat(line, Collections.singletonList(frame));
     }
 
-    public AnyCond(){
+    public NormalLine(){
         line = new ArrayList<>();
     }
 
-    private AnyCond(List<Frame> frames) {
+    private NormalLine(List<Frame> frames) {
         this.line = frames;
     }
 
     @Override
     public Line add(Frame frame) {
-        return new AnyCond(this.line, frame);
+        return new NormalLine(this.line, frame);
     }
 
     @Override
     public Line add(List<Frame> frames) {
-        return new AnyCond(frames);
+        return new NormalLine(frames);
     }
 
     @Override

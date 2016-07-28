@@ -7,14 +7,14 @@ public class LineFactory {
 
     public static Line select(StringParser parse) {
         if(parse.isAllStrike())
-            return LineMaker.AllStrike.make(parse.tokens());
+            return LineBuilder.AllStrike.builder(parse.tokens());
         if(parse.isAllSpare())
-            return LineMaker.AllSpare.make(parse.tokens());
+            return LineBuilder.AllSpare.builder(parse.tokens());
         if(parse.isAllPin())
-            return LineMaker.AllPin.make(parse.tokens());
+            return LineBuilder.AllPin.builder(parse.tokens());
         if(parse.isNoStrikeNoSpare())
-            return LineMaker.NoSpareNoStrike.make(parse.tokens());
-        return LineMaker.Default.make(parse.tokens());
+            return LineBuilder.NoSpareNoStrike.builder(parse.tokens());
+        return LineBuilder.Default.builder(parse.tokens());
     }
 
 }

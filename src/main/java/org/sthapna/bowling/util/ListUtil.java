@@ -34,6 +34,14 @@ public class ListUtil {
         throw new LineEmptyException();
     }
 
+    public static <T> List<T> init(final List<T> list) {
+        return list.subList(0,list.size() - 2);
+    }
+
+    public static <T> T lastElm(final List<T> list){
+        return list.get(list.size() - 1);
+    }
+
     private static class LineEmptyException extends RuntimeException {
     }
 }

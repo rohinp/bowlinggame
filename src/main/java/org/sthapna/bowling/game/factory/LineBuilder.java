@@ -10,22 +10,21 @@ import java.util.stream.Collectors;
 import static java.lang.Integer.parseInt;
 import static org.sthapna.bowling.game.Frame.*;
 import static org.sthapna.bowling.game.linestrategies.Line.*;
-import static org.sthapna.bowling.util.ListUtil.head;
-import static org.sthapna.bowling.util.ListUtil.next;
-import static org.sthapna.bowling.util.ListUtil.tail;
+import static org.sthapna.bowling.util.ListUtil.*;
 
-public enum LineMaker {
+public enum LineBuilder {
     AllStrike {
         @Override
-        public Line make(List<String> line) {
+        public Line builder(List<String> line) {
             return create(Type.AllStrike);
         }
     },
+
     AllSpare {
         @Override
-        public Line make(List<String> tokens) {
+        public Line builder(List<String> tokens) {
             return loop(tokens.stream().filter(e -> e.matches("\\d"))
-                    .collect(Collectors.toList()), create(Type.AllSpare));
+                    .collect(Collectors.toList()), create());
         }
 
         private Line loop(final List<String> tokens, final Line accLine) {
@@ -39,36 +38,37 @@ public enum LineMaker {
                     last(parseInt(tokens.get(0)),STRIKE_SCORE - parseInt(tokens.get(0)), parseInt(tokens.get(1)));
         }
     },
+
     AllPin {
         @Override
-        Line make(List<String> tokens) {
-            return create(Type.NoSpareNoStrike).add(tokens.stream().filter(e -> e.matches("\\d"))
-                    .map(f -> onePin(parseInt(f))).collect(Collectors.toList()));
+        Line builder(List<String> tokens) {
+            return create().add(init(tokens).stream().filter(e -> e.matches("\\d"))
+                    .map(f -> onePin(parseInt(f))).collect(Collectors.toList()))
+                    .add(last(parseInt(lastElm(tokens)),0,0));
         }
     },
 
     NoSpareNoStrike {
         @Override
-        Line make(List<String> tokens) {
-            return loop(tokens, create(Type.NoSpareNoStrike));
+        Line builder(List<String> tokens) {
+            return loop(tokens, create());
         }
 
         private  Line loop(final List<String> tokens, final Line accLine) {
-            if(tokens.isEmpty())
-                return accLine;
+            if(accLine.noOfFrames() == 9)
+                return accLine.add(last(parseInt(tokens.get(0)), parseInt(tokens.get(1)),0));
             return loop(tail(tail(tokens)),accLine.add(frame(parseInt(tokens.get(0)), parseInt(tokens.get(1)))));
         }
     },
 
     Default {
         @Override
-        Line make(List<String> tokens) {
-            return loop(tokens, create(Type.DEFAULT));
+        Line builder(List<String> tokens) {
+            return loop(tokens, create());
         }
 
         private  Line loop(final List<String> tokens, final Line accLine) {
-            if(accLine.noOfFrames() == 9)
-                return accLine.add(makeFrame(tokens));
+            if(accLine.noOfFrames() == 9) return accLine.add(makeFrame(tokens));
             if(head(tokens).equals(Symbols.STRIKE.val())) return loop(tail(tokens),accLine.add(Frame.strike()));
             if(next(tokens).equals(Symbols.SPARE.val())) return loop(tail(tail(tokens)),accLine.add(Frame.spare(parseInt(tokens.get(0)))));
             if(next(tokens).equals(Symbols.PIN.val())) return loop(tail(tail(tokens)),accLine.add(Frame.onePin(parseInt(tokens.get(0)))));
@@ -82,5 +82,5 @@ public enum LineMaker {
     };
 
 
-    abstract Line make(List<String> line);
+    abstract Line builder(List<String> line);
 }

@@ -11,7 +11,7 @@ public class LineTests {
     @Test
     public void itShouldCreateALineWith_NoSpareNoStrike(){
         //given
-        Line line = create(Type.NoSpareNoStrike);
+        Line line = create();
         //when
         line = line.add(frame(1,2))
                 .add(frame(3,4))
@@ -22,7 +22,7 @@ public class LineTests {
                 .add(frame(3,4))
                 .add(frame(5,1))
                 .add(frame(2,3))
-                .add(frame(4,5));
+                .add(last(4,5,0));
         //then
         assertEquals(60, line.totalScore());
 
@@ -31,7 +31,7 @@ public class LineTests {
     @Test
     public void itShouldCreateALineWith_AllPinNoStrikeNoSpare(){
         //given
-        Line line = create(Type.NoSpareNoStrike);
+        Line line = create();
         //when
         line = line.add(onePin(5))
                 .add(onePin(5))
@@ -42,7 +42,7 @@ public class LineTests {
                 .add(onePin(5))
                 .add(onePin(5))
                 .add(onePin(5))
-                .add(onePin(5));
+                .add(last(5,0,0));
         //then
         assertEquals(50, line.totalScore());
 
@@ -62,7 +62,7 @@ public class LineTests {
     @Test
     public void itShouldCreateALineWith_AllSpare(){
         //given
-        Line line = create(Type.AllSpare);
+        Line line = create();
 
         //when
         line = line.add(spare(5))
@@ -84,7 +84,7 @@ public class LineTests {
     @Test
     public void itShouldCreateALineWith_CoupleOfStrikeConsecutiveSpare_LastFrameNormal(){
         //given
-        Line line = create(Type.DEFAULT);
+        Line line = create();
 
         //when
         line = line.add(frame(1,2))
@@ -106,7 +106,7 @@ public class LineTests {
     @Test
     public void itShouldCreateALineWith_ConsecutiveStrikeCoupleOfSpare_LastFrameNormal(){
         //given
-        Line line = create(Type.DEFAULT);
+        Line line = create();
 
         //when
         line = line.add(frame(1,2))
@@ -128,7 +128,7 @@ public class LineTests {
     @Test
     public void itShouldCreateALineWith_ConsecutiveStrikeCoupleOfSpare_LastFrameAllStrike(){
         //given
-        Line line = create(Type.DEFAULT);
+        Line line = create();
 
         //when
         line = line.add(frame(1,2))
@@ -150,7 +150,7 @@ public class LineTests {
     @Test
     public void itShouldCreateALineWith_ConsecutiveStrikeLastFrameAllStrike(){
         //given
-        Line line = create(Type.DEFAULT);
+        Line line = create();
 
         //when
         line = line.add(frame(1,2))

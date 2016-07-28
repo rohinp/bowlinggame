@@ -8,10 +8,8 @@ public interface Line {
 
 
     enum Type {
-        NoSpareNoStrike(new NoSpareNoStrike()),
-        AllSpare(new SpareEach()),
         AllStrike(new PerfectGame()),
-        DEFAULT(new AnyCond());
+        NORMAL(new NormalLine());
 
         final Line line;
         Type(Line l) {
@@ -30,6 +28,9 @@ public interface Line {
 
     static Line create(Type type) {
         return type.line();
+    }
+    static Line create() {
+        return new NormalLine();
     }
 }
 
