@@ -11,7 +11,7 @@ enum Operations {
 
     ON_LAST() {
         @Override
-        int calculate(List<Frame> line) {
+        int eval(List<Frame> line) {
             Frame c = head(line);
             if(c.isStrike()) return c.score() - c._1()  + STRIKE_SCORE;
             if(c.isSpare()) return  c.score() - c._1() - c._2() + STRIKE_SCORE;
@@ -21,7 +21,7 @@ enum Operations {
 
     ON_STRIKE() {
         @Override
-        int calculate(List<Frame> line) {
+        int eval(List<Frame> line) {
             if(next(line).isLast()) return next(line)._1() + next(line)._2() + STRIKE_SCORE;
             else if(next(line).isStrike()) return 2 * STRIKE_SCORE + nextToNext(line)._1();
             else return STRIKE_SCORE + next(line).score();
@@ -30,24 +30,24 @@ enum Operations {
 
     ON_SPARE() {
         @Override
-        int calculate(List<Frame> line) {
+        int eval(List<Frame> line) {
             return next(line)._1() + STRIKE_SCORE;
         }
     },
 
     DEFAULT() {
         @Override
-        int calculate(List<Frame> line) {
+        int eval(List<Frame> line) {
             return head(line).score();
         }
     };
 
     static int apply(final List<Frame> line) {
-        if(head(line).isLast()) return Operations.ON_LAST.calculate(line);
-        if(head(line).isStrike())return Operations.ON_STRIKE.calculate(line);
-        if(head(line).isSpare()) return Operations.ON_SPARE.calculate(line);
-        return Operations.DEFAULT.calculate(line);
+        if(head(line).isLast()) return Operations.ON_LAST.eval(line);
+        if(head(line).isStrike())return Operations.ON_STRIKE.eval(line);
+        if(head(line).isSpare()) return Operations.ON_SPARE.eval(line);
+        return Operations.DEFAULT.eval(line);
     }
 
-    abstract int calculate(final List<Frame> line);
+    abstract int eval(final List<Frame> line);
 }
