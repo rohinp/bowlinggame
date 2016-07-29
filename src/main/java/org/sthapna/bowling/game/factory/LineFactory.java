@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
 import static org.sthapna.bowling.game.Frame.*;
-import static org.sthapna.bowling.game.linestrategies.Line.*;
+import static org.sthapna.bowling.game.linestrategies.Line.create;
+import static org.sthapna.bowling.game.linestrategies.Line.perfectGame;
 import static org.sthapna.bowling.util.ListUtil.*;
 
 public enum LineFactory {
@@ -35,17 +36,17 @@ public enum LineFactory {
         }
 
         private Frame makeFrame(List<String> tokens) {
-            return tokens.size() != 2 ? spare(parseInt(tokens.get(0))):
-                    last(parseInt(tokens.get(0)),STRIKE_SCORE - parseInt(tokens.get(0)), parseInt(tokens.get(1)));
+            return tokens.size() != 2 ? spare(parseInt(head(tokens))):
+                    last(parseInt(head(tokens)),STRIKE_SCORE - parseInt(head(tokens)), parseInt(next(tokens)));
         }
     },
 
     AllPin {
         @Override
         Line builder(List<String> tokens) {
-            return create().add(init(tokens).stream().filter(e -> e.matches("\\d"))
+            return create().add(init(init(tokens)).stream().filter(e -> e.matches("\\d"))
                     .map(f -> onePin(parseInt(f))).collect(Collectors.toList()))
-                    .add(last(parseInt(lastElm(tokens)),0,0));
+                    .add(last(parseInt(fromLast(tokens,2)),0,0));
         }
     },
 
@@ -57,8 +58,8 @@ public enum LineFactory {
 
         private  Line loop(final List<String> tokens, final Line accLine) {
             if(accLine.noOfFrames() == 9)
-                return accLine.add(last(parseInt(tokens.get(0)), parseInt(tokens.get(1)),0));
-            return loop(tail(tail(tokens)),accLine.add(frame(parseInt(tokens.get(0)), parseInt(tokens.get(1)))));
+                return accLine.add(last(parseInt(head(tokens)), parseInt(next(tokens)),0));
+            return loop(tail(tail(tokens)),accLine.add(frame(parseInt(head(tokens)), parseInt(next(tokens)))));
         }
     },
 
@@ -71,14 +72,14 @@ public enum LineFactory {
         private  Line loop(final List<String> tokens, final Line accLine) {
             if(accLine.noOfFrames() == 9) return accLine.add(makeFrame(tokens));
             if(head(tokens).equals(Symbols.STRIKE.val())) return loop(tail(tokens),accLine.add(strike()));
-            if(next(tokens).equals(Symbols.SPARE.val())) return loop(tail(tail(tokens)),accLine.add(spare(parseInt(tokens.get(0)))));
-            if(next(tokens).equals(Symbols.PIN.val())) return loop(tail(tail(tokens)),accLine.add(onePin(parseInt(tokens.get(0)))));
-            return loop(tail(tail(tokens)),accLine.add(frame(parseInt(tokens.get(0)), parseInt(tokens.get(1)))));
+            if(next(tokens).equals(Symbols.SPARE.val())) return loop(tail(tail(tokens)),accLine.add(spare(parseInt(head(tokens)))));
+            if(next(tokens).equals(Symbols.PIN.val())) return loop(tail(tail(tokens)),accLine.add(onePin(parseInt(head(tokens)))));
+            return loop(tail(tail(tokens)),accLine.add(frame(parseInt(head(tokens)), parseInt(next(tokens)))));
         }
 
         private Frame makeFrame(List<String> tokens) {
-            return tokens.size() == 3 ? last(parseInt(tokens.get(0)),parseInt(tokens.get(1)),parseInt(tokens.get(2))):
-                    last(parseInt(tokens.get(0)),parseInt(tokens.get(1)),0);
+            return tokens.size() == 3 ? last(parseInt(head(tokens)),parseInt(next(tokens)),parseInt(nextToNext(tokens))):
+                    last(parseInt(head(tokens)),parseInt(next(tokens)),0);
         }
     };
 

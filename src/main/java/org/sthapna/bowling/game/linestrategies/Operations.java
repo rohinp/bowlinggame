@@ -1,11 +1,11 @@
 package org.sthapna.bowling.game.linestrategies;
 
 import org.sthapna.bowling.game.Frame;
+
 import java.util.List;
+
 import static org.sthapna.bowling.game.Frame.STRIKE_SCORE;
-import static org.sthapna.bowling.util.ListUtil.head;
-import static org.sthapna.bowling.util.ListUtil.next;
-import static org.sthapna.bowling.util.ListUtil.nextToNext;
+import static org.sthapna.bowling.util.ListUtil.*;
 
 enum Operations {
 

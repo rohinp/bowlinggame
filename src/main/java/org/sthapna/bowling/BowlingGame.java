@@ -11,7 +11,7 @@ public class BowlingGame {
         return new BowlingGame();
     }
 
-    public void input(String line) {
+    public void rolls(String line) {
         game = LineFactory.select(StringParser.parse(line));
     }
 

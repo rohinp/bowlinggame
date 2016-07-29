@@ -13,7 +13,7 @@ public class BowlingGameTests {
         BowlingGame bowlingGame = BowlingGame.play();
 
         //when
-        bowlingGame.input("XXXXXXXXXXXX");
+        bowlingGame.rolls("XXXXXXXXXXXX");
 
         //then
         assertEquals(300,bowlingGame.totalScore());
@@ -25,7 +25,7 @@ public class BowlingGameTests {
         BowlingGame bowlingGame = BowlingGame.play();
 
         //when
-        bowlingGame.input("5/5/5/5/5/5/5/5/5/5/5");
+        bowlingGame.rolls("5/5/5/5/5/5/5/5/5/5/5");
 
         //then
         assertEquals(150,bowlingGame.totalScore());
@@ -37,7 +37,7 @@ public class BowlingGameTests {
         BowlingGame bowlingGame = BowlingGame.play();
 
         //when
-        bowlingGame.input("9-9-9-9-9-9-9-9-9-9-");
+        bowlingGame.rolls("9-9-9-9-9-9-9-9-9-9-");
 
         //then
         assertEquals(90,bowlingGame.totalScore());
@@ -49,7 +49,7 @@ public class BowlingGameTests {
         BowlingGame bowlingGame = BowlingGame.play();
 
         //when
-        bowlingGame.input("12345123451234512345");
+        bowlingGame.rolls("12345123451234512345");
 
         //then
         assertEquals(60,bowlingGame.totalScore());
@@ -61,7 +61,7 @@ public class BowlingGameTests {
         BowlingGame bowlingGame = BowlingGame.play();
 
         //when
-        bowlingGame.input("1234X2345X346/7/450");
+        bowlingGame.rolls("1234X2345X346/7/450");
 
         //then
         assertEquals(103,bowlingGame.totalScore());
